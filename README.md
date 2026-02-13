@@ -14,7 +14,7 @@ A production-ready ASP.NET Core Web API for managing appointment bookings with a
 - Docker & Docker Compose
 - GitHub Actions CI
 - Swagger (OpenAPI)
-- <img width="1893" height="995" alt="Screenshot 2026-02-13 152210" src="https://github.com/user-attachments/assets/6f32a169-57d7-40ee-b9d6-4bacec5b1bde" />
+
 
 
 - ## ✨ Features
@@ -37,19 +37,105 @@ A production-ready ASP.NET Core Web API for managing appointment bookings with a
 - Dockerized Setup
 - CI Pipeline
 
-- ## 🏗 Architecture
+## 🏗 Clean Architecture Overview
 
-The project follows Clean Architecture principles:
+```mermaid
+flowchart LR
 
-- Controllers → Handle HTTP Requests
-- Services → Business Logic
-- Repositories → Database Access
-- DTOs → Data Transfer Objects
-- Middleware → Logging & Exception Handling
+    Client --> Controller
+    Controller --> Service
+    Service --> Repository
+    Repository --> Database[(PostgreSQL)]
 
-Database: PostgreSQL
-ORM: Entity Framework Core
-Authentication: JWT Bearer
+    Controller --> Middleware
+    Middleware --> Logging
+    Middleware --> ExceptionHandling
+```
+
+
+## 🗄️ Entity Relationship Diagram
+
+
+```mermaid
+erDiagram
+
+    USER ||--o{ APPOINTMENT : books
+    USER ||--o{ IDEMPOTENCY_KEY : generates
+
+    APPOINTMENT ||--|| CONSULTATION : has
+    CONSULTATION ||--o{ PRESCRIPTION : includes
+
+    USER {
+        int Id PK
+        string FullName
+        string Email
+        string PasswordHash
+        string Role
+        datetime CreatedAt
+    }
+
+    APPOINTMENT {
+        int Id PK
+        datetime AppointmentDate
+        string Status
+        string Notes
+        int UserId FK
+        datetime CreatedAt
+    }
+
+    CONSULTATION {
+        int Id PK
+        string Diagnosis
+        string DoctorNotes
+        int AppointmentId FK
+        datetime CreatedAt
+    }
+
+    PRESCRIPTION {
+        int Id PK
+        string MedicineName
+        string Dosage
+        string Duration
+        int ConsultationId FK
+        datetime CreatedAt
+    }
+
+    IDEMPOTENCY_KEY {
+        int Id PK
+        string Key
+        string RequestHash
+        datetime CreatedAt
+        int UserId FK
+    }
+```
+
+
+## 🔄 Application Flow
+
+```mermaid
+flowchart TD
+
+    A[User Registers/Login] --> B[Generate JWT]
+    B --> C[Access Protected API]
+
+    C --> D[Book Appointment]
+    D --> E[Store Appointment in DB]
+
+    E --> F[Doctor Creates Consultation]
+    F --> G[Add Diagnosis & Notes]
+
+    G --> H[Generate Prescription]
+    H --> I[Store Medicines]
+
+    C --> J[Idempotency Middleware]
+    C --> K[JWT Validation]
+    C --> L[RBAC Authorization]
+
+    I --> M[(PostgreSQL Database)]
+```
+
+
+
 
 ## ⚙️ Local Setup
 
