@@ -145,15 +145,16 @@ git clone https://github.com/poornimajoshi90/appointment-booking-api.git
 
 cd appointment-booking-api
 
-### 2️⃣ Run with Docker
-
-docker-compose up --build
+## 🚀 API Running Information
 
 API runs at:
-http://localhost:5000
 
-Swagger:
-http://localhost:5000/swagger
+http://localhost:8080
+
+Swagger UI:
+
+http://localhost:8080/swagger/index.html
+
 
 ## 🔐 Environment Variables
 
