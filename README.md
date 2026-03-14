@@ -104,7 +104,7 @@ I --> J[(PostgreSQL Database)]
 
 Detailed API documentation is available in the following files:
 
-* [Introduction](docs/introduction.md)
+* [Introduction](introduction.md)
 * [API Endpoints](docs/api-endpoints.md)
 * [Authentication Guide](docs/authentication.md)
 * [Error Codes](docs/error-codes.md)
