@@ -105,9 +105,9 @@ I --> J[(PostgreSQL Database)]
 Detailed API documentation is available in the following files:
 
 * [Introduction](Documentation/introduction.md)
-* [API Endpoints](docs/api-endpoints.md)
-* [Authentication Guide](docs/authentication.md)
-* [Error Codes](docs/error-codes.md)
+* [API Endpoints](Documentation/api-endpoints.md)
+* [Authentication Guide](Documentation/authentication.md)
+* [Error Codes](Documentation/error-codes.md)
 
 These documents help developers understand how to authenticate, use API endpoints, and handle API responses.
 
