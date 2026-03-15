@@ -5,7 +5,12 @@ The API provides secure authentication, role-based authorization, appointment wo
 
 This project demonstrates real-world backend engineering practices including containerized deployment, CI/CD pipelines, and observability.
 
+
 ---
+
+# Documentation
+
+https://api-documentation-529r.vercel.app/
 
 # 🚀 Tech Stack
 
